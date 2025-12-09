@@ -1,5 +1,72 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
 
-/* твои кастомные цвета, если нужны */
+* {
+  box-sizing: border-box;
+}
+
+:root {
+  --background: #f8f8f8;
+  --foreground: #171717;
+  --font-montserrat-sans: "Montserrat", sans-serif;
+  --font-montserrat-mono: "Montserrat", monospace;
+}
+
+/* переносить в UI-components так: text-gray-9d, без "--color"! */
+@theme {
+  --color-orange-fd: #fd7a18;
+  --color-dark-orange: #e06000;
+  --color-orange-disabled: #ffc091;
+  --color-dark-gray-4f: #4f4f4f;
+  --color-gray-9b: #9b9b9b; /* 'gray', а не 'grey' */
+  --color-light-gray-38: rgba(38, 38, 38, 0.25);
+  --color-light-gray-f8: #f8f8f8;
+  --color-light-gray-af: #AFAFAF;
+  --color-black-26: #262626;
+  --color-black-0a: #0a0a0a;
+  --color-accent-e0: #e00000;
+  --color-white-ff: #ffffff;
+  --color-green-12: #12ac3a;
+  --color-hover-link: #0000ff;
+  --color-beige: #FFF3E6;
+
+  /* breakpoints */
+  --breakpoint-sm: 375px;
+  --breakpoint-sm_max: 426px;
+  --breakpoint-sm_plus: 548px;
+  --breakpoint-md: 744px;
+  --breakpoint-md_max: 768px;
+  --breakpoint-md_mid: 940px;
+  --breakpoint-md_plus: 1024px;
+  --breakpoint-md_extra: 1054px;
+  --breakpoint-lg: 1440px;
+  --breakpoint-lg_max: 1920px;
+}
+
+@layer base {
+  input[type="search"]::-webkit-search-decoration,
+  input[type="search"]::-webkit-search-cancel-button,
+  input[type="search"]::-webkit-search-results-button,
+  input[type="search"]::-webkit-search-results-decoration {
+    -webkit-appearance: none;
+  }
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus {
+  
+  box-shadow: 0 0 0 1000px transparent inset;
+
+  transition: background-color 99999999999s ease-in-out 0s;
+}
+
+html {
+  height: 100%;
+}
+
+body {
+  height: 100%;
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-montserrat-sans);
+}

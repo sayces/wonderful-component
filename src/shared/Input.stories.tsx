@@ -6,7 +6,7 @@ import * as Icons from '../assets'; // Твои иконки
 // Мета: базовая конфигурация для всех сторис
 const meta: Meta<typeof Input> = {
   title: 'Components/Input', // Название в сайдбаре Storybook
-  component: Input,
+  component: Input, // Компонент
   parameters: {
     layout: 'centered', // Центрируем для удобства
     docs: {

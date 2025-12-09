@@ -84,9 +84,9 @@ const Button = ({
         </a>
       ) : (
         <button disabled={disabled || isLoading} type={type} onClick={onClick} className={classNames} {...rest}>
-          {leftIcon && <span className="flex items-center -translate-y-[1px]">{leftIcon}</span>}
+          {leftIcon && <span className="flex items-center -translate-y-px">{leftIcon}</span>}
           <span>{children}</span>
-          {rightIcon && <span className={clsx('flex items-center -translate-y-[-1px]', rotate180)}>{rightIcon}</span>}
+          {rightIcon && <span className={clsx('flex items-center -translate-y-px', rotate180)}>{rightIcon}</span>}
         </button>
       )}
     </>
