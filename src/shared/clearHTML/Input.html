@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="ru" class="h-full">
+<head>
+  <meta charset="UTF-8" />
+  <title>Input без React</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/imask"></script>
+  <style>
+    .label-float {
+      @apply absolute text-xl duration-200 transform -translate-y-3 scale-75 top-0 origin-0 bg-white px-1 start-4;
+    }
+    .label-placeholder {
+      @apply top-1/2 -translate-y-1/2 scale-90 cursor-text;
+    }
+  </style>
+</head>
+<body class="min-h-screen bg-gray-100 flex items-center justify-center">
+
+<div class="space-y-12">
+
+  <!-- 1. Обычный текст -->
+  <div class="relative">
+    <input
+      type="text"
+      id="name"
+      placeholder=" "
+      class="peer block px-5 py-7 text-xl bg-white rounded-[10px] border border-black/15 focus:outline-orange-500 w-80"
+    />
+    <label for="name" class="label-float label-placeholder text-gray-500 peer-focus:text-orange-500 peer-placeholder-shown:text-gray-500">
+      Ваше имя
+    </label>
+  </div>
+
+  <!-- 2. Пароль с глазком -->
+  <div class="relative">
+    <input
+      type="password"
+      id="pass"
+      placeholder=" "
+      class="peer block px-5 py-7 pr-14 text-xl bg-white rounded-[10px] border border-black/15 focus:outline-orange-500 w-80"
+    />
+    <label for="pass" class="label-float label-placeholder text-gray-500 peer-focus:text-orange-500">
+      Пароль
+    </label>
+    <button
+      type="button"
+      onclick="this.previousElementSibling.type = this.previousElementSibling.type==='password'?'text':'password';
+               this.querySelector('span').textContent = this.previousElementSibling.type==='password'?'Показать':'Скрыть'"
+      class="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500 hover:text-gray-800"
+    >
+      <span>Показать</span>
+    </button>
+  </div>
+
+  <!-- 3. Телефон с маской -->
+  <div class="relative">
+    <input
+      type="text"
+      id="phone"
+      placeholder=" "
+      class="peer block px-5 py-7 text-xl bg-white rounded-[10px] border border-black/15 focus:outline-orange-500 w-80"
+    />
+    <label for="phone" class="label-float label-placeholder text-gray-500 peer-focus:text-orange-500">
+      Телефон
+    </label>
+  </div>
+
+  <!-- 4. С ошибкой -->
+  <div class="relative">
+    <input
+      type="text"
+      placeholder=" "
+      value="неправильный@email"
+      class="peer block px-5 py-7 text-xl bg-white rounded-[10px] border border-red-500 focus:outline-red-500 w-80"
+    />
+    <label class="label-float text-red-500 top-0 scale-75">Email</label>
+    <p class="pl-3 pt-1 text-red-500 text-sm">Неверный формат email</p>
+  </div>
+
+</div>
+
+<script>
+// Маска для телефона (IMask)
+IMask(document.getElementById('phone'), {
+  mask: '+7 (000) 000-00-00',
+  lazy: false
+});
+
+// Плавучка лейблов (peer-placeholder-shown магия Tailwind)
+document.querySelectorAll('input').forEach(input => {
+  // если в инпуте уже есть значение — поднимаем лейбл сразу
+  if (input.value) input.classList.add('peer-not-placeholder-shown');
+});
+</script>
+
+</body>
+</html>

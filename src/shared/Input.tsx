@@ -71,7 +71,10 @@ const Input = ({
     }
 
     if (onChange) onChange?.(e); // уведомляем react-hook-form
-    onChangeValue?.(newValue); // пробрасываем наружу
+
+    if (!mask) {
+      onChangeValue?.(newValue);
+    }
   };
 
   const handleInputOnKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
@@ -139,9 +142,13 @@ const Input = ({
       lazy: true,
     });
 
-    maskInstance.on("accept", () => {
-      onChangeValue?.(maskInstance.value);
-    });
+    const handleAccept = () => {
+      const newValue = maskInstance.value; // или maskInstance.value
+      onChangeValue?.(newValue);
+      // Если используешь react-hook-form — можно ещё controller-у передать
+    };
+
+    maskInstance.on("accept", handleAccept);
 
     return () => maskInstance.destroy();
   }, [mask, onChangeValue]);
@@ -164,12 +171,12 @@ const Input = ({
           autoComplete="off"
           id={finalId}
           type={inputType}
-          ref={inputRef}
+          ref={inputRef} // ref нужен для маски
           placeholder={(!label && placeholder) || ""}
           value={value}
           className={classNames.input}
           disabled={disabled}
-          onChange={mask ? () => {} : handleInputOnChange}
+          onChange={handleInputOnChange}
           onKeyDown={handleInputOnKeyDown}
           {...rest}
         />

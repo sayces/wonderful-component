@@ -45,15 +45,17 @@ const ControlledInput = <T extends FieldValues>(props: Props<T>) => {
     onBlur();
   };
 
+  const handleOnChangeValue = (val: string) => {
+    onChange(val); // react-hook-form обновляет state
+    onChangeValue?.(val); // пробрасываем дальше
+  };
+
   return (
     <Input
       {...rest}
       value={value ?? ""}
       mask={mask}
-      onChangeValue={(val) => {
-        onChange(val); // react-hook-form обновляет state
-        onChangeValue?.(val); // пробрасываем дальше
-      }}
+      onChangeValue={handleOnChangeValue}
       onBlur={handleBlur}
     />
   );
